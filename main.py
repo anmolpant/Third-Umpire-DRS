@@ -1,6 +1,10 @@
 import tkinter
 import cv2
+from functools import partial
 import PIL.Image, PIL.ImageTk
+
+def play(speed):
+    print(f"inshallah bois. speed is {speed} ")
 
 #height and width of main screen
 SET_WIDTH = 650
@@ -17,16 +21,16 @@ canvas.pack()
 
 
 #adding buttons
-btn = tkinter.Button(window, text = "<< Previous (fast)", width = 50)
+btn = tkinter.Button(window, text = "<< Previous (fast)", width = 50, command = partial(play, -25))
 btn.pack()
 
-btn = tkinter.Button(window, text = "<< Previous (slow)", width = 50)
+btn = tkinter.Button(window, text = "<< Previous (slow)", width = 50, command = partial(play, -2))
 btn.pack()
 
-btn = tkinter.Button(window, text = " Next (slow) >>", width = 50)
+btn = tkinter.Button(window, text = " Next (slow) >>", width = 50, command = partial(play, 2))
 btn.pack()
 
-btn = tkinter.Button(window, text = " Next (fast) >>", width = 50)
+btn = tkinter.Button(window, text = " Next (fast) >>", width = 50, command = partial(play, 25))
 btn.pack()
 
 btn = tkinter.Button(window, text = " Give Out", width = 50)
