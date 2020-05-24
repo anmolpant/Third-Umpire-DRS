@@ -2,9 +2,25 @@ import tkinter
 import cv2
 from functools import partial
 import PIL.Image, PIL.ImageTk
+import threading
 
 def play(speed):
     print(f"inshallah bois. speed is {speed} ")
+
+def pending():
+    pass
+
+def out():
+    thread = threading.Thread(target=pending, args=("out",))
+    thread.daemon = 1
+    thread.start()
+    print("player is out")
+
+def not_out():
+    thread = threading.Thread(target=pending, args=("not out",))
+    thread.daemon = 1
+    thread.start()
+    print("player is not out")
 
 #height and width of main screen
 SET_WIDTH = 650
@@ -33,9 +49,9 @@ btn.pack()
 btn = tkinter.Button(window, text = " Next (fast) >>", width = 50, command = partial(play, 25))
 btn.pack()
 
-btn = tkinter.Button(window, text = " Give Out", width = 50)
+btn = tkinter.Button(window, text = " Give Out", width = 50, command=out)
 btn.pack()
 
-btn = tkinter.Button(window, text = " Give Not Out", width = 50)
+btn = tkinter.Button(window, text = " Give Not Out", width = 50, command = not_out)
 btn.pack()
 window.mainloop()
