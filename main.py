@@ -3,6 +3,7 @@ import cv2
 from functools import partial
 import PIL.Image, PIL.ImageTk
 import imutils
+import time
 import threading
 
 def play(speed):
@@ -16,9 +17,31 @@ def pending(decision):
     canvas.image = frame
     canvas.create_image(0,0, image=frame, anchor=tkinter.NW)
     #wait
+    time.sleep(1)
     #sponsor image
+    frame = cv2.cvtColor(cv2.imread("sponsor.png"), cv2.COLOR_BGR2RGB)
+    frame = imutils.resize(frame, width=SET_WIDTH, height=SET_HEIGHT)
+    frame = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
+    canvas.image = frame
+    canvas.create_image(0,0, image=frame, anchor=tkinter.NW)
     #wait
+    time.sleep(2)
     #decision
+    if decision == "out":
+        decisionImg = "out.png"
+        frame = cv2.cvtColor(cv2.imread(decisionImg), cv2.COLOR_BGR2RGB)
+        frame = imutils.resize(frame, width=SET_WIDTH, height=SET_HEIGHT)
+        frame = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
+        canvas.image = frame
+        canvas.create_image(0,0, image=frame, anchor=tkinter.NW)
+
+    else:
+        decisionImg = "not_out.png"
+        frame = cv2.cvtColor(cv2.imread(decisionImg), cv2.COLOR_BGR2RGB)
+        frame = imutils.resize(frame, width=SET_WIDTH, height=SET_HEIGHT)
+        frame = PIL.ImageTk.PhotoImage(image=PIL.Image.fromarray(frame))
+        canvas.image = frame
+        canvas.create_image(0,0, image=frame, anchor=tkinter.NW)
 
 def out():
     thread = threading.Thread(target=pending, args=("out",))
